@@ -6,17 +6,19 @@
 
 <body>
     <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
-        <input type="file" name="userPhoto" multiple />
-        <input type="submit" value="Upload Image" name="submit">
-        <select name="carlist" form="carform">
+
+        <select name="carlist" form="uploadForm">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
           <option value="audi">Audi</option>
         </select>
         <input type="text" value="title" name="title">
-        </br><span id="status"></span>
+        <input type="file" name="userPhoto" multiple />
+        <input type="submit" value="Upload Image" name="submit" />
     </form>
+
+    </br><span id="status"></span>
 </body>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

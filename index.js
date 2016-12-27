@@ -2,16 +2,17 @@ var express =   require("express");
 var bodyParser =    require("body-parser");
 var multer  =   require('multer');
 var app =   express();
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    console.log('destination')
-    console.log(multer.limits)
+    console.log('destination: ', req.body);
     callback(null, './uploads');
   },
   filename: function (req, file, callback) {
-    console.log('file: ', file);
+    console.log('filename: ', req.body);
     if( file.mimetype === 'image/jpeg'){
       var name = Date.now() + "." + 'jpg'
     } else if (file.mimetype === 'image/png'){
@@ -25,7 +26,6 @@ var limits = {
   fileSize: 10000000
 }
 
-
 var upload = multer({ storage : storage, limits : limits }).array('userPhoto',10)
 // console.log(upload());
 
@@ -34,7 +34,7 @@ app.get('/',function(req,res){
 });
 
 app.post('/api/photo', function(req,res){
-  // console.log('post request: ',req);
+  console.log('why not here: ',  req.body)
     upload(req,res,function(err) {
       console.log('after upload');
         //console.log(req.body);
