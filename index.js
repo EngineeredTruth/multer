@@ -21,7 +21,7 @@ var storage = multer.diskStorage({
   }
 });
 
-let limits = {
+var limits = {
   fileSize: 10000000
 }
 
@@ -34,7 +34,7 @@ app.get('/',function(req,res){
 });
 
 app.post('/api/photo', function(req,res){
-  console.log('post request: ',req);
+  // console.log('post request: ',req);
     upload(req,res,function(err) {
       console.log('after upload');
         //console.log(req.body);
