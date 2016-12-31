@@ -2,7 +2,8 @@ var express =   require("express");
 var bodyParser =    require("body-parser");
 var multer  =   require('multer');
 var app =   express();
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -34,7 +35,7 @@ app.get('/',function(req,res){
 });
 
 app.post('/api/photo', function(req,res){
-  console.log('post request: ',req);
+  console.log('post request: ', req.body);
     upload(req,res,function(err) {
       console.log('after upload');
         //console.log(req.body);
