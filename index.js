@@ -2,14 +2,11 @@ var express =   require("express");
 var bodyParser =    require("body-parser");
 var multer  =   require('multer');
 var app =   express();
-<<<<<<< HEAD
-app.use(bodyParser.urlencoded({ extended: true }));
 
-=======
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
->>>>>>> 34d7aec93f9699f90beba822e3d75bf7f9c694db
 
+//actual code below
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -32,25 +29,30 @@ var limits = {
 }
 
 var upload = multer({ storage : storage, limits : limits }).array('userPhoto',10)
+
 // console.log(upload());
 
-app.get('/',function(req,res){
-      res.sendFile(__dirname + "/index.html");
-});
+// app.get('/',function(req,res){
+//       res.sendFile(__dirname + "/index.html");
+// });
 
 app.post('/api/photo', function(req,res){
   console.log('post request: ', req.body);
 
     upload(req,res,function(err) {
+      //jumps up in the code
       console.log('after upload');
-        //console.log(req.body);
-        //console.log(req.files);
+        console.log(req.body);
+        console.log(req.files);
         if(err) {
             return res.end("Error uploading file: ", err);
         }
-        res.end("File is uploaded");
+        // res.end("File is uploaded");
+        res.json({"File Size": req.files.size});
     });
 });
+
+//Same end
 
 app.listen(3000,function(){
     console.log("Working on port 3000");
